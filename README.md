@@ -1,5 +1,7 @@
 ## **High-Fidelity Mobile Architecture: Engineering the Travel Booking Experience in Flutter**
 
+[Check Course Curriculum](https://systemdrd.com/courses/ai-agents-system-design/)
+
 The travel app industry has undergone a radical transformation, evolving from simple reservation portals into highly sophisticated, $1 trillion ecosystems that demand near-native performance and bespoke aesthetic quality. In the contemporary landscape of 2025 and 2026, the success of a travel platform is predicated not merely on the utility of booking a flight, but on the fluidity and emotional resonance of the digital experience. As mobile users increasingly anticipate hyper-personalized, "alive" interfaces that react to their context and behavior, developers face the challenge of building apps that are both visually rich and architecturally resilient. This report details a comprehensive, expert-level course designed for senior engineers and aspiring architects, focusing on the construction of "NomadAir," a production-ready travel booking application. The curriculum emphasizes the intersection of high-performance rendering—bridging the gap between mobile and game development—and robust system design tailored for the volatility of the aviation and hospitality sectors.
 
 ## **Why This Course?**
