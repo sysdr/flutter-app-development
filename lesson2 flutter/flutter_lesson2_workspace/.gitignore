@@ -1,0 +1,19 @@
+# Workspace-level generated artifacts
+flutter_studio_dashboard.html
+verification_report.json
+demo_state.env
+
+# AVD references are optional local docs (ignore if regenerated)
+avd_configs/
+
+# Flutter app artifacts
+lesson2_test_app/.dart_tool/
+lesson2_test_app/build/
+lesson2_test_app/.flutter-plugins
+lesson2_test_app/.flutter-plugins-dependencies
+lesson2_test_app/.packages
+lesson2_test_app/.pub/
+
+# IDE
+.idea/
+.vscode/
