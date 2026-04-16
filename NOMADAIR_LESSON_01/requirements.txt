@@ -1,0 +1,5 @@
+# Python dependencies for optional tooling.
+# This Flutter project does not require Python packages by default.
+pre-commit>=3.8.0
+ruff>=0.6.0
+pytest>=8.3.0
