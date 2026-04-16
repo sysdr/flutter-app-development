@@ -1,0 +1,13 @@
+# requirements.txt
+# Dependency status for this repository:
+#
+# 1) Python dependencies:
+#    - None (no third-party Python packages required)
+#    - setup.py uses only the Python standard library
+#
+# 2) Non-Python toolchain required (install separately):
+#    - Python >= 3.11
+#    - Flutter SDK (available on PATH as "flutter")
+#    - Android SDK / emulator for mobile runs
+#
+# This file is intentionally package-empty for pip.

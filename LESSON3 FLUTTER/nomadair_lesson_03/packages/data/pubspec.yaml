@@ -1,0 +1,21 @@
+name: nomadair_data
+description: >
+  NomadAir data package. Repository implementations and mock data layer.
+  Depends on nomadair_core for domain models and interfaces.
+  Must never import from nomadair_ui.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  nomadair_core:
+    path: ../core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0

@@ -1,0 +1,19 @@
+name: nomadair_core
+description: >
+  NomadAir core package. Design tokens, domain models, and
+  repository interfaces. Has no dependency on nomadair_ui or
+  nomadair_data — it is the shared foundation both depend on.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0

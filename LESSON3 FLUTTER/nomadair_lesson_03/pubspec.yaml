@@ -1,0 +1,29 @@
+name: nomadair_lesson_03
+description: "NomadAir Lesson 03 — Multi-Package Monorepo Scaffold"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  # ── NomadAir path-based packages ──────────────────────────
+  nomadair_core:
+    path: packages/core
+  nomadair_ui:
+    path: packages/ui
+  nomadair_data:
+    path: packages/data
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
