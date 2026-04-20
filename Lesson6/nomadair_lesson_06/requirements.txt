@@ -1,0 +1,11 @@
+# Python dependency status for this child project
+#
+# This repository is a Flutter/Dart app.
+# Python is only used for optional local automation scripts.
+#
+# Required runtime tooling:
+# - Python >= 3.11 (optional for scripts)
+# - Flutter SDK (required)
+#
+# Pip packages:
+# - None required.

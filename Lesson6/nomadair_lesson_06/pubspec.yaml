@@ -1,0 +1,26 @@
+name: nomadair_lesson_06
+description: "NomadAir Lesson 06"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  nomadair_core:
+    path: packages/core
+  nomadair_ui:
+    path: packages/ui
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
