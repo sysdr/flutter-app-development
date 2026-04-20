@@ -1,0 +1,14 @@
+# Python dependency note (this Flutter app)
+#
+# The Flutter application does not require any Python packages.
+#
+# This file documents optional Python usage:
+# - If you use a parent `Lesson4/setup.py` bootstrap script, that script uses
+#   only the Python standard library (no pip packages).
+# - No need to run: pip install -r requirements.txt
+# - For Flutter work, use Flutter/Dart only (see README.md).
+#
+# When to add packages here:
+# - Only if you add Python automation under this repo that imports third-party
+#   libraries. Example:
+#   requests==2.32.3
