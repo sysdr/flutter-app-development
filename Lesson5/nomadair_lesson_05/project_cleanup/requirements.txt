@@ -1,0 +1,8 @@
+# Dependency status for project_cleanup
+#
+# This folder contains shell-based cleanup utilities only (`cleanup.sh`).
+# It does not import or execute Python modules that require pip packages.
+# Therefore, there are currently no Python dependencies to install.
+#
+# If Python tooling is added later, list pinned packages below, for example:
+# package_name==1.2.3
