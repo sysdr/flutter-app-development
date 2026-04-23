@@ -1,0 +1,28 @@
+# =============================================================================
+# Lesson 7 — Python (`../setup.py`) dependency status
+# =============================================================================
+#
+# This file lives next to the Flutter app; it documents the bootstrap script
+# one directory up: `../setup.py` uses only the Python standard library.
+#
+# No packages need to be installed for `setup.py` on Python 3.11+.
+#
+#   python -m venv .venv
+#   .venv\Scripts\activate   # Windows
+#   pip install -r requirements.txt
+#
+# The line below is never installed on Python 3.11+ (per marker). It exists so
+# `pip install -r requirements.txt` always has a valid requirement line on
+# older pip versions that reject comment-only files.
+typing_extensions>=4.0.0; python_version < "3.11"
+
+# =============================================================================
+# Flutter / Dart (NOT installed via this file)
+# =============================================================================
+#   flutter pub get
+#
+# =============================================================================
+# Optional dev-only (uncomment if you add Python linting for `setup.py`)
+# =============================================================================
+# ruff>=0.4.0
+# mypy>=1.8.0

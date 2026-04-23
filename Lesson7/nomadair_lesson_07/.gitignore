@@ -1,0 +1,75 @@
+# Parent directory: ../setup.py (bootstrap) — not moved; ignore its caches here
+../__pycache__/
+../*.py[cod]
+../*.pyc
+../.pytest_cache/
+../.mypy_cache/
+../.ruff_cache/
+../.venv/
+../venv/
+
+# Flutter app + tooling in this directory
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+node_modules/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# project-cleanup (Docker helper)
+project-cleanup/*.log
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+.atom/
+
+# Kubernetes / mesh
+**/istio/**
+*istio*.yaml
+*istio*.yml
+
+# Secrets
+*.pem
+*.key
+*.jks
+secrets/
+
+# Flutter / Dart
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+build/
+coverage/
+migrate_working_dir/
+**/.svn/
+app.*.symbols
+app.*.map.json
+**/.build/
+**/.buildlog
+**/.history
+**/.swiftpm/
+**/*.class
+android/.gradle/
+android/app/debug/
+android/app/profile/
+android/app/release/
+**/*.iml
+**/*.ipr
+**/*.iws
+.idea/
+.idea/**
