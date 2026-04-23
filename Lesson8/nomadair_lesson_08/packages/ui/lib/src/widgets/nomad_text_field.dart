@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+import 'package:nomadair_core/core.dart';
+
+/// NomadAir text input.
+///
+/// Lesson 08 — Full semantic annotation:
+///   [Semantics.label]     — read before "Edit text" by TalkBack
+///   [Semantics.textField] — marks as editable input
+///   [Semantics.enabled]   — reflects disabled state
+///   Error conveyed via [errorText] — text, not color alone (WCAG 1.4.1)
+final class NomadTextField extends StatelessWidget {
+  const NomadTextField({
+    super.key,required this.label,this.hint,this.error,
+    this.controller,this.prefixIcon,this.suffixIcon,
+    this.onSuffixTap,this.obscureText=false,
+    this.enabled=true,this.onChanged,this.semanticLabel,
+  });
+  final String label;
+  final String? hint,error,semanticLabel;
+  final TextEditingController? controller;
+  final IconData? prefixIcon,suffixIcon;
+  final VoidCallback? onSuffixTap;
+  final bool obscureText,enabled;
+  final ValueChanged<String>? onChanged;
+
+  @override
+  Widget build(BuildContext context){
+    final t=Theme.of(context).extension<NomadThemeExtension>()!;
+    final br=BorderRadius.circular(AppSpacing.radiusMd);
+    return Semantics(
+      label:semanticLabel??label,
+      textField:true,
+      enabled:enabled,
+      child:ConstrainedBox(
+        constraints:const BoxConstraints(minHeight:AppSpacing.minTouchTarget),
+        child:TextField(
+          controller:controller,enabled:enabled,
+          obscureText:obscureText,onChanged:onChanged,
+          style:AppTypography.bodyLarge.copyWith(color:t.onSurfaceColor),
+          cursorColor:t.brandPrimary,
+          decoration:InputDecoration(
+            labelText:label,hintText:hint,errorText:error,
+            filled:true,
+            fillColor:enabled?t.surfaceColor:t.onSurfaceColor.withAlpha(10),
+            prefixIcon:prefixIcon!=null
+              ?ExcludeSemantics(
+                  child:Icon(prefixIcon,size:20,color:t.onSurfaceColor.withAlpha(160)))
+              :null,
+            suffixIcon:suffixIcon!=null
+              ?Semantics(
+                  label:'Toggle field action',
+                  button:true,
+                  child:IconButton(
+                    icon:Icon(suffixIcon,size:20),
+                    onPressed:onSuffixTap))
+              :null,
+            contentPadding:const EdgeInsets.symmetric(
+              horizontal:AppSpacing.md,vertical:14),
+            enabledBorder:OutlineInputBorder(borderRadius:br,
+              borderSide:BorderSide(color:t.onSurfaceColor.withAlpha(60))),
+            focusedBorder:OutlineInputBorder(borderRadius:br,
+              borderSide:BorderSide(color:t.brandPrimary,width:2)),
+            errorBorder:OutlineInputBorder(borderRadius:br,
+              borderSide:BorderSide(color:t.errorColor)),
+            focusedErrorBorder:OutlineInputBorder(borderRadius:br,
+              borderSide:BorderSide(color:t.errorColor,width:2)),
+            disabledBorder:OutlineInputBorder(borderRadius:br,
+              borderSide:BorderSide(color:t.onSurfaceColor.withAlpha(30))),
+          ),
+        ),
+      ),
+    );
+  }
+}

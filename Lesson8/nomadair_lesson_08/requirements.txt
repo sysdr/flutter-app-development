@@ -1,0 +1,4 @@
+flutter
+python>=3.11
+docker
+android-sdk-platform-tools
