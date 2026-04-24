@@ -1,0 +1,13 @@
+# Lesson9 Python dependency status
+# --------------------------------
+# This project is a Flutter app and does not require any third-party Python
+# packages to run `setup.py`.
+#
+# Required Python runtime:
+# - Python 3.11+ (validated by setup.py at runtime)
+#
+# External tools used by setup.py (not installed via pip):
+# - Flutter SDK (must be available on PATH)
+#
+# Keep this file present for repository consistency and CI environments that
+# expect a requirements file. It intentionally contains no pinned packages.
