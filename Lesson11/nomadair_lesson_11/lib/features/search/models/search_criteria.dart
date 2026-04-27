@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+
+enum CabinClass { economy, premiumEconomy, business, firstClass }
+
+final class PassengerCount {
+  const PassengerCount({this.adults=1,this.children=0,this.infants=0});
+  final int adults,children,infants;
+  int get total=>adults+children+infants;
+}
+
+final class SearchCriteria {
+  const SearchCriteria({
+    this.origin='',this.destination='',
+    this.departureDate,this.returnDate,
+    this.passengers=const PassengerCount(),
+    this.cabinClass=CabinClass.economy,
+  });
+  final String origin,destination;
+  final DateTime? departureDate,returnDate;
+  final PassengerCount passengers;
+  final CabinClass cabinClass;
+  bool get isValid=>origin.trim().isNotEmpty&&destination.trim().isNotEmpty&&departureDate!=null;
+  SearchCriteria copyWith({String? origin,String? destination,DateTime? departureDate,DateTime? returnDate,PassengerCount? passengers,CabinClass? cabinClass})=>
+      SearchCriteria(origin:origin??this.origin,destination:destination??this.destination,departureDate:departureDate??this.departureDate,returnDate:returnDate??this.returnDate,passengers:passengers??this.passengers,cabinClass:cabinClass??this.cabinClass);
+}
