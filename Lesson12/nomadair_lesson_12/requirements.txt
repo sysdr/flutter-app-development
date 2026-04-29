@@ -1,0 +1,9 @@
+# Lesson12 Python dependency status
+# ---------------------------------
+# This project does not require any third-party Python packages.
+# `setup.py` uses only Python standard library modules.
+#
+# Required runtime:
+# - Python >= 3.11
+#
+# If future Python dependencies are introduced, list and pin them here.

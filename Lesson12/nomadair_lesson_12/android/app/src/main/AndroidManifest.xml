@@ -1,0 +1,75 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application
+        android:label="NomadAir"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+
+        <!-- ── Main Activity ─────────────────────────────────────── -->
+        <!--
+          launchMode="singleTop": Android reuses the existing Activity
+          instance when a deep link arrives while the app is open.
+          Without this, each deep link tap creates a NEW FlutterActivity
+          — the user ends up with multiple app instances.
+          onNewIntent() delivers warm-start deep links to the existing
+          instance via Flutter's SystemChannels.navigation channel.
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+
+            <!-- Default Flutter LAUNCHER intent -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <!-- ── Custom scheme: nomadair:// ──────────────────────
+                 Handles URLs of the form: nomadair://flights/search
+                 autoVerify="false" — no server verification needed.
+                 Production apps use "true" for HTTPS App Links only.
+            -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="nomadair"/>
+            </intent-filter>
+
+            <!-- ── HTTPS App Links: https://nomadair.com ───────────
+                 Handles URLs of the form: https://nomadair.com/search
+                 autoVerify="true" triggers Android's App Link
+                 verification against:
+                 https://nomadair.com/.well-known/assetlinks.json
+                 Without a real server, this verification fails
+                 silently — the link opens in a browser instead.
+                 Lesson 25 configures the real Firebase Hosting to
+                 serve assetlinks.json for production push notifications.
+            -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https" android:host="nomadair.com"/>
+            </intent-filter>
+
+        </activity>
+
+        <!-- Don't delete the FlutterActivity metadata -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+        <!-- Skia backend avoids Impeller+OpenGLES tearing on some emulators during route changes -->
+        <meta-data
+            android:name="io.flutter.embedding.android.EnableImpeller"
+            android:value="false" />
+    </application>
+
+    <!-- Flutter internet permission (for future API calls) -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>

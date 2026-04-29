@@ -1,0 +1,2 @@
+import '../models/destination_model.dart';
+final class DiscoveryState{const DiscoveryState({this.filter=DiscoveryFilter.all,this.loading=false});final DiscoveryFilter filter;final bool loading;DiscoveryState copyWith({DiscoveryFilter? filter,bool? loading})=>DiscoveryState(filter:filter??this.filter,loading:loading??this.loading);List<DiscoveryDestination> filtered(List<DiscoveryDestination> all)=>filter==DiscoveryFilter.all?all:all.where((d)=>d.category==filter.name||d.category=='both').toList();}
