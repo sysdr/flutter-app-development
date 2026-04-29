@@ -1,0 +1,11 @@
+import 'package:flutter/material.dart';
+abstract final class AppColors{
+  static const Color blue50=Color(0xFFE8F0FE),blue300=Color(0xFF8AB4F8),blue600=Color(0xFF1A73E8);
+  static const Color green50=Color(0xFFE6F4EA),green300=Color(0xFF81C995),green500=Color(0xFF34A853);
+  static const Color amber50=Color(0xFFFEF9E7),amber300=Color(0xFFFDD663),amber600=Color(0xFFE8A020),amber700=Color(0xFFF09300);
+  static const Color red50=Color(0xFFFCE8E6),red500=Color(0xFFEA4335);
+  static const Color grey50=Color(0xFFF8F9FA),grey100=Color(0xFFF1F3F4),grey200=Color(0xFFE8EAED),grey500=Color(0xFF9AA0A6),grey700=Color(0xFF5F6368),grey900=Color(0xFF202124);
+  static const Color white=Color(0xFFFFFFFF),black=Color(0xFF000000);
+  static const Color darkSurface=Color(0xFF1E1E2E),darkBackground=Color(0xFF121212),darkElevated=Color(0xFF2A2A3E),darkDivider=Color(0xFF2C2C3E);
+  static const Color semanticOverlay=Color(0xFF00897B);
+}

@@ -1,0 +1,11 @@
+# requirements.txt
+#
+# Dependency status for this lesson:
+# - No third-party Python packages are required.
+# - The setup/generation flow uses only Python standard library modules.
+#
+# Runtime/tooling prerequisites (not pip-installed here):
+# - Python >= 3.11
+# - Flutter SDK (available on PATH)
+#
+# If future lessons add Python packages, list and pin them here.
