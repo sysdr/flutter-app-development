@@ -1,0 +1,6 @@
+# Optional Python tooling for this standalone app repository.
+# No required pip packages at the moment.
+#
+# Flutter/Dart dependencies for this app: see pubspec.yaml
+#
+#   pip install -r scripts/requirements.txt   # only if you add optional Python tools later
