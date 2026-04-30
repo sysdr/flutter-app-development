@@ -1,0 +1,32 @@
+name: nomadair_lesson_16
+description: "NomadAir Lesson 16 — Introduction to Provider and InheritedWidget"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  go_router: ^14.6.1
+  shared_preferences: ^2.3.2
+  intl: ^0.19.0
+  # ── New in Lesson 16 ─────────────────────────────────────────────
+  provider: ^6.1.2        # ChangeNotifier injection, watch/read pattern
+  # ── NomadAir packages ────────────────────────────────────────────
+  nomadair_core:
+    path: packages/core
+  nomadair_ui:
+    path: packages/ui
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
