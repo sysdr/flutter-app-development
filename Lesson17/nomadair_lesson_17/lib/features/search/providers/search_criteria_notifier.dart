@@ -1,0 +1,40 @@
+import 'package:flutter/foundation.dart';
+import '../models/search_criteria.dart';
+import '../models/selected_city.dart';
+
+final class SearchCriteriaNotifier extends ChangeNotifier {
+  SearchCriteria _c = const SearchCriteria();
+  SearchCriteria get criteria => _c;
+
+  void setOrigin(SelectedCity? v) {
+    if (_c.origin == v) return;
+    _c = _c.copyWith(origin: v); notifyListeners();
+  }
+  void setDestination(SelectedCity? v) {
+    if (_c.destination == v) return;
+    _c = _c.copyWith(destination: v); notifyListeners();
+  }
+  void setDepartureDate(DateTime? v) {
+    _c = _c.copyWith(
+      departureDate: v,
+      returnDate: _c.returnDate != null && v != null &&
+          _c.returnDate!.isBefore(v) ? null : _c.returnDate,
+    ); notifyListeners();
+  }
+  void setReturnDate(DateTime? v) {
+    _c = _c.copyWith(returnDate: v); notifyListeners();
+  }
+  void setPassengers(PassengerCount v) {
+    _c = _c.copyWith(passengers: v); notifyListeners();
+  }
+  void setCabinClass(CabinClass v) {
+    if (_c.cabinClass == v) return;
+    _c = _c.copyWith(cabinClass: v); notifyListeners();
+  }
+  void setRoundTrip(bool v) {
+    _c = _c.copyWith(isRoundTrip: v, returnDate: v ? _c.returnDate : null);
+    notifyListeners();
+  }
+  void reset() { _c = const SearchCriteria(); notifyListeners(); }
+  String? validate() => _c.validate();
+}

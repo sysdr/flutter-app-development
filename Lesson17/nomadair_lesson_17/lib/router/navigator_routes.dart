@@ -1,0 +1,1 @@
+abstract final class NavigatorRoutes{static const String discovery='/discovery',destinationDetail='/discovery/detail',search='/search',searchResults='/search/results',trips='/trips',profile='/profile';}

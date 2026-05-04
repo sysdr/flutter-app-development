@@ -1,0 +1,7 @@
+# NomadAir Lesson 17 — Flutter app
+#
+# The application uses Dart only; dependencies are declared in pubspec.yaml.
+# Python is not required to build or run this project.
+#
+# Optional — only if you add Python-based tooling or scripts later:
+# pytest>=8.0.0

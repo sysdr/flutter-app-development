@@ -1,0 +1,109 @@
+import 'package:flutter/material.dart';
+import 'package:nomadair_core/core.dart';
+import 'package:nomadair_ui/ui.dart';
+import '../models/search_criteria.dart';
+final class PassengerCountSelector extends StatelessWidget {
+  const PassengerCountSelector(
+    {super.key, required this.value, required this.onChanged});
+  final PassengerCount value;
+  final ValueChanged<PassengerCount> onChanged;
+  @override Widget build(BuildContext ctx) {
+    final t  = Theme.of(ctx).extension<NomadThemeExtension>()!;
+    final br = BorderRadius.circular(AppSpacing.radiusMd);
+    return InkWell(
+      onTap: () async {
+        final r = await showModalBottomSheet<PassengerCount>(context: ctx,
+          isScrollControlled: true,
+          shape: const RoundedRectangleBorder(borderRadius:
+            BorderRadius.vertical(top: Radius.circular(AppSpacing.radiusMd))),
+          builder: (_) => _Sheet(initial: value));
+        if (r != null) onChanged(r);
+      },
+      borderRadius: br,
+      child: InputDecorator(
+        decoration: InputDecoration(
+          labelText: 'Passengers', filled: true, fillColor: t.surfaceColor,
+          prefixIcon: ExcludeSemantics(child: Icon(Icons.people_outline,
+            size: 20, color: t.onSurfaceColor.withAlpha(160))),
+          suffixIcon: ExcludeSemantics(child: Icon(Icons.expand_more,
+            color: t.onSurfaceColor.withAlpha(160))),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md, vertical: 14),
+          enabledBorder: OutlineInputBorder(borderRadius: br,
+            borderSide: BorderSide(color: t.onSurfaceColor.withAlpha(60)))),
+        child: Text(value.summary,
+          style: AppTypography.bodyLarge.copyWith(color: t.onSurfaceColor))));
+  }
+}
+final class _Sheet extends StatefulWidget {
+  const _Sheet({required this.initial});
+  final PassengerCount initial;
+  @override State<_Sheet> createState() => _SheetState();
+}
+final class _SheetState extends State<_Sheet> {
+  late int _a, _c, _i;
+  @override void initState() {
+    super.initState();
+    _a = widget.initial.adults;
+    _c = widget.initial.children;
+    _i = widget.initial.infants;
+  }
+  @override Widget build(BuildContext ctx) {
+    final t = Theme.of(ctx).extension<NomadThemeExtension>()!;
+    final cur = PassengerCount(adults: _a, children: _c, infants: _i);
+    return SafeArea(child: Padding(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
+        Container(width: 40, height: 4,
+          decoration: BoxDecoration(color: t.onSurfaceColor.withAlpha(60),
+            borderRadius: BorderRadius.circular(2))),
+        const SizedBox(height: AppSpacing.md),
+        Text('Passengers', style: AppTypography.headlineMedium
+          .copyWith(color: t.onSurfaceColor)),
+        const SizedBox(height: AppSpacing.lg),
+        _Row(label:'Adults', sub:'12+', count:_a, min:1, max:9,
+          onDec: ()=>setState(()=>_a--),
+          onInc: ()=>setState((){_a++;if(_i>_a)_i=_a;})),
+        Divider(color: t.dividerColor, height: AppSpacing.lg),
+        _Row(label:'Children', sub:'2–11', count:_c, min:0, max:8,
+          onDec: ()=>setState(()=>_c--), onInc: ()=>setState(()=>_c++)),
+        Divider(color: t.dividerColor, height: AppSpacing.lg),
+        _Row(label:'Infants', sub:'Under 2', count:_i, min:0, max:_a,
+          onDec: ()=>setState(()=>_i--), onInc: ()=>setState(()=>_i++)),
+        const SizedBox(height: AppSpacing.xl),
+        NomadButton(
+          label: 'Confirm  ·  ${cur.summary}',
+          onPressed: () => Navigator.of(ctx).pop(cur)),
+      ])));
+  }
+}
+final class _Row extends StatelessWidget {
+  const _Row({required this.label, required this.sub,
+    required this.count, required this.min, required this.max,
+    required this.onDec, required this.onInc});
+  final String label, sub; final int count, min, max;
+  final VoidCallback onDec, onInc;
+  @override Widget build(BuildContext ctx) {
+    final t = Theme.of(ctx).extension<NomadThemeExtension>()!;
+    return Row(children: [
+      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: AppTypography.bodyLarge
+            .copyWith(color: t.onSurfaceColor, fontWeight: FontWeight.w600)),
+          Text(sub, style: AppTypography.bodySmall
+            .copyWith(color: t.onSurfaceColor.withAlpha(140))),
+        ])),
+      IconButton(
+        icon: Icon(Icons.remove_circle_outline, size: 28,
+          color: count<=min ? t.onSurfaceColor.withAlpha(60) : t.brandPrimary),
+        onPressed: count <= min ? null : onDec),
+      SizedBox(width: 36, child: Text('$count', textAlign: TextAlign.center,
+        style: AppTypography.headlineMedium
+          .copyWith(color: t.onSurfaceColor, fontWeight: FontWeight.w700))),
+      IconButton(
+        icon: Icon(Icons.add_circle_outline, size: 28,
+          color: count>=max ? t.onSurfaceColor.withAlpha(60) : t.brandPrimary),
+        onPressed: count >= max ? null : onInc),
+    ]);
+  }
+}

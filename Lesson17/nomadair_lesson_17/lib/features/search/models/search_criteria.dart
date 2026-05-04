@@ -1,0 +1,86 @@
+import 'package:intl/intl.dart';
+import 'selected_city.dart';
+
+enum CabinClass {
+  economy(label: 'Economy'),
+  premiumEconomy(label: 'Premium Economy'),
+  business(label: 'Business'),
+  firstClass(label: 'First Class');
+  const CabinClass({required this.label});
+  final String label;
+}
+
+final class PassengerCount {
+  const PassengerCount({this.adults = 1, this.children = 0, this.infants = 0});
+  final int adults, children, infants;
+  int get total => adults + children + infants;
+  String get summary {
+    final p = <String>['$adults Adult${adults == 1 ? '' : 's'}'];
+    if (children > 0) p.add('$children Child${children == 1 ? '' : 'ren'}');
+    if (infants  > 0) p.add('$infants Infant${infants  == 1 ? '' : 's'}');
+    return p.join(', ');
+  }
+  PassengerCount copyWith({int? adults, int? children, int? infants}) =>
+      PassengerCount(
+        adults:   adults   ?? this.adults,
+        children: children ?? this.children,
+        infants:  infants  ?? this.infants,
+      );
+}
+
+final class SearchCriteria {
+  const SearchCriteria({
+    this.origin,
+    this.destination,
+    this.departureDate,
+    this.returnDate,
+    this.passengers  = const PassengerCount(),
+    this.cabinClass  = CabinClass.economy,
+    this.isRoundTrip = true,
+  });
+  final SelectedCity?  origin;
+  final SelectedCity?  destination;
+  final DateTime?      departureDate;
+  final DateTime?      returnDate;
+  final PassengerCount passengers;
+  final CabinClass     cabinClass;
+  final bool           isRoundTrip;
+
+  static final _fmt = DateFormat('dd MMM yyyy');
+  String get departureDateDisplay =>
+      departureDate != null ? _fmt.format(departureDate!) : '';
+  String get returnDateDisplay =>
+      returnDate != null ? _fmt.format(returnDate!) : '';
+
+  String? validate() {
+    if (origin == null)      return 'Please select a valid departure city';
+    if (destination == null) return 'Please select a valid destination city';
+    if (origin!.iata == destination!.iata)
+      return 'Origin and destination cannot be the same city';
+    if (departureDate == null) return 'Please select a departure date';
+    if (isRoundTrip && returnDate == null)
+      return 'Please select a return date';
+    if (isRoundTrip && returnDate != null &&
+        !returnDate!.isAfter(departureDate!))
+      return 'Return date must be after departure date';
+    return null;
+  }
+
+  SearchCriteria copyWith({
+    SelectedCity?  origin,
+    SelectedCity?  destination,
+    DateTime?      departureDate,
+    DateTime?      returnDate,
+    PassengerCount? passengers,
+    CabinClass?    cabinClass,
+    bool?          isRoundTrip,
+  }) => SearchCriteria(
+    origin:        origin        ?? this.origin,
+    destination:   destination   ?? this.destination,
+    departureDate: departureDate ?? this.departureDate,
+    returnDate:    returnDate    ?? this.returnDate,
+    passengers:    passengers    ?? this.passengers,
+    cabinClass:    cabinClass    ?? this.cabinClass,
+    isRoundTrip:   isRoundTrip   ?? this.isRoundTrip,
+  );
+}

@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:nomadair_core/core.dart';
+final class DiscoveryCardFull extends StatelessWidget {
+  const DiscoveryCardFull({super.key, required this.destination, this.onBook});
+  final DiscoveryDestination destination;
+  final VoidCallback? onBook;
+  @override Widget build(BuildContext context) {
+    return Stack(fit: StackFit.expand, children: [
+      ExcludeSemantics(child: CustomPaint(
+        painter: _P(top: Color(destination.skyColorTop),
+          bottom: Color(destination.skyColorBottom)))),
+      Positioned(left: 0, right: 0, bottom: 0,
+        child: Container(height: 200,
+          decoration: BoxDecoration(gradient: LinearGradient(
+            begin: Alignment.topCenter, end: Alignment.bottomCenter,
+            colors: [Colors.transparent, Colors.black.withAlpha(200)])))),
+      Positioned(left: AppSpacing.lg, right: AppSpacing.lg,
+        bottom: AppSpacing.xl,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min, children: [
+          Text(destination.city,
+            style: AppTypography.displayLarge.copyWith(
+              color: AppColors.white)),
+          Text(destination.formattedPrice,
+            style: AppTypography.headlineMedium.copyWith(
+              color: AppColors.white, fontWeight: FontWeight.w700)),
+          if (onBook != null) ...[
+            const SizedBox(height: AppSpacing.md),
+            SizedBox(width: 160, child: FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: AppColors.white.withAlpha(230),
+                foregroundColor: AppColors.grey900,
+                minimumSize: const Size(0, AppSpacing.minTouchTarget),
+                shape: RoundedRectangleBorder(borderRadius:
+                  BorderRadius.circular(AppSpacing.radiusMd))),
+              onPressed: onBook,
+              child: const Text('Book Now'))),
+          ],
+        ])),
+    ]);
+  }
+}
+class _P extends CustomPainter {
+  const _P({required this.top, required this.bottom});
+  final Color top, bottom;
+  @override void paint(Canvas c, Size s) {
+    c.drawRect(Offset.zero & s, Paint()..shader = LinearGradient(
+      begin: Alignment.topLeft, end: Alignment.bottomRight,
+      colors: [top, bottom]).createShader(Offset.zero & s));
+  }
+  @override bool shouldRepaint(_P o) => o.top != top || o.bottom != bottom;
+}

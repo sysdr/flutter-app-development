@@ -1,0 +1,182 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:nomadair_core/core.dart';
+import '../models/flight_result.dart';
+
+/// Rich flight card showing times, route, price, baggage, stops,
+/// low-seat warning, and refundable badge.
+final class FlightResultCard extends StatelessWidget {
+  const FlightResultCard({super.key, required this.flight, this.onTap});
+  final FlightResult flight;
+  final VoidCallback? onTap;
+  static final _tf = DateFormat('HH:mm');
+
+  @override
+  Widget build(BuildContext context) {
+    final t  = Theme.of(context).extension<NomadThemeExtension>()!;
+    final lo = flight.seatsLeft <= 5;
+
+    return MergeSemantics(
+      child: Semantics(
+        label: flight.accessibilityLabel,
+        button: onTap != null,
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusMd)),
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // ── header ──────────────────────────────────────
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.md, AppSpacing.md, AppSpacing.md, AppSpacing.xs),
+                  child: Row(children: [
+                    ExcludeSemantics(child: Icon(
+                      Icons.flight, size: 14,
+                      color: t.onSurfaceColor.withAlpha(130))),
+                    const SizedBox(width: AppSpacing.xs),
+                    Expanded(child: Text(
+                      '${flight.airline}  ·  ${flight.flightNumber}',
+                      style: AppTypography.labelLarge.copyWith(
+                        color: t.onSurfaceColor))),
+                    if (flight.isRefundable)
+                      _Badge(
+                        label: 'Refundable',
+                        color: t.successColor,
+                        icon: Icons.check_circle_outline),
+                  ])),
+                Divider(height: 1, color: t.dividerColor),
+                // ── times + route ────────────────────────────────
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      _TimeBlock(
+                        time: _tf.format(flight.departureTime),
+                        iata: flight.origin, t: t),
+                      Expanded(child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(flight.formattedDuration,
+                            textAlign: TextAlign.center,
+                            style: AppTypography.monoSmall.copyWith(
+                              color: t.onSurfaceColor.withAlpha(140))),
+                          const SizedBox(height: 4),
+                          Row(children: [
+                            Expanded(child: Divider(height: 1,
+                              color: t.onSurfaceColor.withAlpha(70))),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6),
+                              child: ExcludeSemantics(child: Icon(
+                                Icons.flight, size: 15,
+                                color: t.brandPrimary))),
+                            Expanded(child: Divider(height: 1,
+                              color: t.onSurfaceColor.withAlpha(70))),
+                          ]),
+                          const SizedBox(height: 4),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: flight.stops == 0
+                                ? t.successColor.withAlpha(14)
+                                : t.warningColor.withAlpha(14),
+                              borderRadius: BorderRadius.circular(
+                                AppSpacing.radiusFull),
+                              border: Border.all(
+                                color: flight.stops == 0
+                                  ? t.successColor.withAlpha(80)
+                                  : t.warningColor.withAlpha(80))),
+                            child: Text(flight.stopsLabel,
+                              textAlign: TextAlign.center,
+                              style: AppTypography.monoSmall.copyWith(
+                                color: flight.stops == 0
+                                  ? t.successColor : t.warningColor,
+                                fontSize: 10))),
+                        ])),
+                      _TimeBlock(
+                        time: _tf.format(flight.arrivalTime),
+                        iata: flight.destination, t: t,
+                        alignEnd: true),
+                    ])),
+                Divider(height: 1, color: t.dividerColor),
+                // ── footer ───────────────────────────────────────
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.md, AppSpacing.sm, AppSpacing.md, AppSpacing.md),
+                  child: Row(children: [
+                    Text(flight.formattedPrice,
+                      style: AppTypography.headlineMedium.copyWith(
+                        color: t.brandPrimary,
+                        fontWeight: FontWeight.w700)),
+                    const SizedBox(width: AppSpacing.md),
+                    ExcludeSemantics(child: const Icon(
+                      Icons.luggage_outlined, size: 14)),
+                    const SizedBox(width: 4),
+                    Text(flight.baggageAllowance,
+                      style: AppTypography.bodySmall.copyWith(
+                        color: t.onSurfaceColor.withAlpha(150))),
+                    const Spacer(),
+                    if (lo)
+                      _Badge(
+                        label: 'Only ${flight.seatsLeft} left!',
+                        color: t.warningColor,
+                        icon: Icons.warning_amber_outlined),
+                  ])),
+              ]),
+            ),
+          ),
+        ));
+  }
+}
+
+class _TimeBlock extends StatelessWidget {
+  const _TimeBlock({
+    required this.time, required this.iata,
+    required this.t, this.alignEnd = false,
+  });
+  final String time, iata;
+  final NomadThemeExtension t;
+  final bool alignEnd;
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: 60,
+    child: Column(
+      crossAxisAlignment:
+        alignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(time, style: AppTypography.headlineSmall.copyWith(
+          color: t.onSurfaceColor, fontWeight: FontWeight.w700)),
+        Text(iata, style: AppTypography.monoSmall.copyWith(
+          color: t.brandPrimary, fontWeight: FontWeight.w700)),
+      ]));
+}
+
+class _Badge extends StatelessWidget {
+  const _Badge({required this.label, required this.color, required this.icon});
+  final String label;
+  final Color color;
+  final IconData icon;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(
+      horizontal: AppSpacing.xs, vertical: 2),
+    decoration: BoxDecoration(
+      color: color.withAlpha(18),
+      borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+      border: Border.all(color: color.withAlpha(80))),
+    child: Row(mainAxisSize: MainAxisSize.min, children: [
+      ExcludeSemantics(child: Icon(icon, size: 11, color: color)),
+      const SizedBox(width: 3),
+      Text(label, style: AppTypography.monoSmall.copyWith(
+        color: color, fontSize: 10, fontWeight: FontWeight.w700)),
+    ]));
+}
