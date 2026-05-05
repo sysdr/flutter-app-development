@@ -1,0 +1,22 @@
+Project cleanup requirements
+
+1) Stop local app/runtime services:
+- Flutter and Dart processes
+- Android emulator (via adb)
+- Node/Python background services in this project
+
+2) Remove disposable local artifacts inside Lesson18:
+- node_modules
+- venv / .venv
+- .pytest_cache
+- *.pyc
+- istio-related files/directories (name contains "istio")
+
+3) Stop Docker containers and remove unused Docker resources:
+- stop running containers
+- docker system prune -af --volumes
+
+4) Keep repository clean:
+- ensure .gitignore includes common cache/build/runtime artifacts
+- document stop/cleanup commands in README
+

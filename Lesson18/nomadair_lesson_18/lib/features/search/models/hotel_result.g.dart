@@ -1,0 +1,7 @@
+// GENERATED CODE — DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, unused_element
+part of 'hotel_result.dart';
+HotelResult _$HotelResultFromJson(Map<String,dynamic> json)=>HotelResult(id:json['id'] as String,name:json['name'] as String,city:json['city'] as String,countryCode:json['country_code'] as String,starRating:_$starFrom(json['star_rating'] as String),pricePerNightInr:(json['price_per_night_inr'] as num).toDouble(),boardType:_$boardFrom(json['board_type'] as String),distanceFromCentreKm:(json['distance_from_centre_km'] as num).toDouble(),isRefundable:json['is_refundable'] as bool,availableRooms:json['available_rooms'] as int,reviewScore:(json['review_score'] as num).toDouble(),reviewCount:json['review_count'] as int);
+Map<String,dynamic> _$HotelResultToJson(HotelResult i)=>{'id':i.id,'name':i.name,'city':i.city,'country_code':i.countryCode,'star_rating':i.starRating.name,'price_per_night_inr':i.pricePerNightInr,'board_type':i.boardType.name,'distance_from_centre_km':i.distanceFromCentreKm,'is_refundable':i.isRefundable,'available_rooms':i.availableRooms,'review_score':i.reviewScore,'review_count':i.reviewCount};
+StarRating _$starFrom(String s)=>StarRating.values.firstWhere((v)=>v.name==s,orElse:()=>throw ArgumentError('Unknown star: $s'));
+BoardType _$boardFrom(String s)=>BoardType.values.firstWhere((v)=>v.name==s,orElse:()=>throw ArgumentError('Unknown board: $s'));
