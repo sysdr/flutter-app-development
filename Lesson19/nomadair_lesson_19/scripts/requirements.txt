@@ -1,0 +1,24 @@
+# =============================================================================
+# Python dependencies — OPTIONAL for this Flutter project
+# =============================================================================
+#
+# The app itself is Dart/Flutter only. All runtime and dev dependencies for the
+# mobile app are declared in ../pubspec.yaml (resolved with `flutter pub get`).
+#
+# This file is for a Python virtual environment when you:
+#   • Run Python-based CI checks or tooling against this repo
+#   • Use an optional generator script outside this folder (e.g. lesson setup.py)
+#   • Execute Python helpers (none required for `flutter run`)
+#
+# Install (only if you need Python here):
+#   python -m venv .venv
+#   .venv\Scripts\activate          # Windows
+#   # source .venv/bin/activate       # macOS / Linux
+#   pip install -r scripts/requirements.txt
+#
+# Status: No packages pinned below — add pins when you introduce Python tools.
+# =============================================================================
+
+# --- Optional: testing / linting for any future Python in this tree ---
+# pytest>=8.0.0
+# ruff>=0.4.0

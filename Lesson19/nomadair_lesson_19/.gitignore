@@ -1,0 +1,117 @@
+# =============================================================================
+# NomadAir Lesson 19 — repo root (Flutter app). Single .gitignore for git push.
+# =============================================================================
+
+# --- Python (optional: local venv when using scripts/requirements.txt) ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+venv/
+.venv/
+env/
+
+# --- Node (if added) ---
+node_modules/
+
+# --- Secrets — never commit ---
+.env
+.env.*
+*.pem
+secrets/
+
+# --- Istio / K8s drafts (if copied here) ---
+**/istio/
+**/*virtualservice*.yaml
+**/*destinationrule*.yaml
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.atom/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+*.swp
+
+# --- IntelliJ / IDE ---
+*.iml
+*.ipr
+*.iws
+.idea/
+
+.vscode/
+
+# --- Flutter / Dart / Pub ---
+*.class
+*.log
+.build/
+.buildlog/
+**/doc/api/
+**/.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+**/build/
+**/coverage/
+**/ios/Flutter/.last_build_id
+
+# Symbolication / obfuscation
+app.*.symbols
+app.*.map.json
+
+# Android Studio output (under Flutter app)
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+
+# --- Android ---
+**/android/.gradle/
+**/android/captures/
+**/android/local.properties
+**/android/.cxx/
+
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/to/reference-keystore
+**/android/key.properties
+**/*.keystore
+**/*.jks
+
+# --- iOS / Xcode ---
+**/dgph
+*.mode1v3
+*.mode2v3
+*.moved-aside
+*.pbxuser
+*.perspectivev3
+**/*sync/
+.sconsign.dblite
+.tags*
+**/.vagrant/
+**/DerivedData/
+Icon?
+**/Pods/
+**/.symlinks/
+**/ios/profile
+xcuserdata
+**/.generated/
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+
+# Exceptions (keep defaults tracked; order matters for git)
+!default.mode1v3
+!default.mode2v3
+!default.pbxuser
+!default.perspectivev3
