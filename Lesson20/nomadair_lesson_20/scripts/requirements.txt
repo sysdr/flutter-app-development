@@ -1,0 +1,15 @@
+#
+# NomadAir — Lesson 20
+# Python dependencies (OPTIONAL)
+# -----------------------------------------------------------------------------
+# This repository is a Flutter/Dart project.
+#
+# - The app runtime dependencies are defined in `pubspec.yaml`.
+# - You do NOT need Python (or pip) to build/run/test the app.
+# - This file exists only to document optional Python utilities you may add
+#   for automation (lint helpers, scripts, CI glue, etc.).
+#
+# Status: intentionally empty (no Python tooling required).
+#
+# If you later add Python scripts under `scripts/`, list their pinned pip
+# requirements here and keep them optional.
