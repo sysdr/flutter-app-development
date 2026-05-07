@@ -1,0 +1,8 @@
+bash
+docker (optional, for container cleanup)
+android platform-tools (adb/emulator)
+powershell (Windows process management)
+bash
+docker (optional, for container cleanup)
+android platform-tools (adb/emulator)
+powershell (Windows process management)
