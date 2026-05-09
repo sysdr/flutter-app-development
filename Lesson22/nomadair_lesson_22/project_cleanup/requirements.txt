@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Tooling required for cleanup scripts
+# - Docker CLI + daemon
+# - Android SDK platform-tools (adb)
+# - Flutter SDK
