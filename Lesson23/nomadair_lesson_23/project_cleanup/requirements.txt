@@ -1,0 +1,3 @@
+# Lesson 23 — project_cleanup (inside nomadair_lesson_23)
+# Optional Python tooling for local maintenance scripts; shell helpers use bash only.
+# Add pins here if you introduce linters or tooling tied to this folder.
