@@ -1,0 +1,14 @@
+name: nomadair_ui
+version: 0.0.1
+publish_to: none
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  nomadair_core:
+    path: ../core
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
