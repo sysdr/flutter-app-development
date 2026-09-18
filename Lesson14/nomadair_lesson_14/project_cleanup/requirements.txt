@@ -1,4 +1,0 @@
-bash
-flutter
-android-sdk-platform-tools (adb)
-docker (optional)

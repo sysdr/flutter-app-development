@@ -1,2 +1,0 @@
-# Python dependencies for utility scripts in this lesson.
-# The project setup script currently uses only Python standard library modules.

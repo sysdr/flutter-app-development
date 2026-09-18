@@ -1,4 +1,0 @@
-python>=3.11
-flutter>=3.41
-docker
-bash

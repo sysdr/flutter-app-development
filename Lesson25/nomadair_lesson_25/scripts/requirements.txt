@@ -1,5 +1,0 @@
-# Tools used by scripts/stop.sh and scripts/cleanup.sh
-bash
-docker
-android platform-tools
-flutter
